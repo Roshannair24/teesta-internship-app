@@ -1,0 +1,25 @@
+body {
+  background-color: burlywood;
+}
+
+.dropdowwn-holder {
+  background-color: yellowgreen;
+  padding: 1rem;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.dropdown-itself {
+  width: 20rem;
+
+  background-color: blue;
+}
+
+
+.dropdown-itself .inner-div {
+  padding: 0.25rem;
+  }
+
