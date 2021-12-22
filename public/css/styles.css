@@ -1,5 +1,8 @@
 body {
   background-color: burlywood;
+
+  /* font-family: 'EB Garamond', serif; */
+  font-family: "Roboto", sans-serif;
 }
 
 .dropdowwn-holder {
@@ -15,11 +18,90 @@ body {
 .dropdown-itself {
   width: 20rem;
 
-  background-color: blue;
-}
+  display: flex;
 
+  flex-direction: column;
+
+  background-color: aqua;
+}
 
 .dropdown-itself .inner-div {
   padding: 0.25rem;
-  }
 
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-itself .inner-div .search-btn-cls {
+  background-color: blueviolet;
+
+  width: 100%;
+}
+
+.dropdown-itself .top-div {
+  background-color: darkgreen;
+}
+
+.dropdown-itself .bottom-div {
+  flex-direction: column;
+}
+
+.dropdown-itself .bottom-div .primary-btn-holder {
+  background-color: crimson;
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-itself .bottom-div .primary-btn-holder #primary-btn {
+  width: 100%;
+}
+
+.dropdown-itself .bottom-div .options-holder {
+ padding-top: 0.25rem;
+  background-color: darkorange;
+  width: 100%;
+}
+
+.dropdown-itself
+  .bottom-div
+  .options-holder
+  .sub-options-holder-a
+  .sub-options-holder-a-top {
+  background-color: firebrick;
+}
+
+.dropdown-itself
+  .bottom-div
+  .options-holder
+  .sub-options-holder-a
+  .sub-options-holder-a-bottom {
+  background-color: darkslategrey;
+
+  display: flex;
+
+  flex-direction: column;
+  width: 100%;
+}
+
+.dropdown-itself
+  .bottom-div
+  .options-holder
+  .sub-options-holder-a
+  .sub-options-holder-a-bottom
+  ul {
+  list-style: none;
+
+  background-color: deepskyblue;
+
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 1rem;
+}
