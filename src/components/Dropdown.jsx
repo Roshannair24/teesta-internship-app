@@ -4,10 +4,11 @@ import Arr from "../task";
 
 function Dropdown() {
   const [rendered, setrendered] = useState(false);
-  const [cityrendered, setcityrendered] = useState(false);
-
-
-
+  const [stateObject, setstateObject] = useState({
+    Madhyapradesh: false,
+    WestBengal: false,
+    Karnataka: false,
+  });
 
   function inputText(event) {
     console.log("typed");
@@ -26,6 +27,49 @@ function Dropdown() {
 
       console.log(rendered);
       setrendered(!rendered);
+    } else {
+      console.log("state object");
+
+      console.log(stateObject);
+
+      let targetToCompare = event.target.id.replace("span_id_", "");
+
+      targetToCompare = targetToCompare.replace(" ", "");
+
+
+      console.log("targetToCompare");
+      console.log(targetToCompare);
+
+      for (const property in stateObject) {
+        console.log(`${property}: ${stateObject[property]}`);
+      }
+
+      setstateObject(function (prevValue) {
+        console.log("prevValue");
+
+        console.log(prevValue);
+
+        if (targetToCompare === "Madhyapradesh") {
+          return {
+            Madhyapradesh: !prevValue.Madhyapradesh,
+            WestBengal: prevValue.WestBengal,
+            Karnataka: prevValue.Karnataka,
+          };
+        } else if (targetToCompare === "WestBengal") {
+          return {
+            Madhyapradesh: prevValue.Madhyapradesh,
+            WestBengal: !prevValue.WestBengal,
+            Karnataka: prevValue.Karnataka,
+          };
+        }else if(targetToCompare === "Karnataka"){
+          return {
+            Madhyapradesh: prevValue.Madhyapradesh,
+            WestBengal: prevValue.WestBengal,
+            Karnataka: !prevValue.Karnataka,
+          };
+
+        }
+      });
     }
   }
 
@@ -38,10 +82,13 @@ function Dropdown() {
   }
 
   function createSubOptionholder(item) {
-    console.log("at create sub option holder func");
+    // console.log("at create sub option holder func");
 
-    console.log(item);
-    console.log(item.state);
+    // console.log(item);
+    // console.log(item.state);
+
+    let tempState = item.state;
+
     return (
       <div className="sub-options-holder-a">
         <div className="sub-options-holder-a-top">
@@ -58,17 +105,33 @@ function Dropdown() {
           </span>
         </div>
 
-        <div className="sub-options-holder-a-bottom">
+        <div
+          id={"bottom_id_" + item.state}
+          className="sub-options-holder-a-bottom"
+        >
           <ul>
             {item.city.map(function (item) {
-              console.log(item);
 
-              console.log("item.name");
+console.log("stateObject");
+console.log(stateObject);
+console.log("tempState");
+console.log(tempState);
+console.log("stateObject.tempState");
+console.log(stateObject[tempState]);
 
-              console.log(item.name);
 
               return (
-                <li>
+
+
+
+
+                <li
+                  className={tempState=tempState.replace(" ", "")}
+                  style={{
+                    display:
+                      stateObject[tempState] === true ? "block" : "none",
+                  }}
+                >
                   <input
                     onClick={checkboxClicked}
                     type="checkbox"
@@ -106,7 +169,11 @@ function Dropdown() {
           </button>
         </div>
 
-        <div  style={{display:rendered===true?"block":"none"}}  id="options-holder-id" className="options-holder">
+        <div
+          style={{ display: rendered === true ? "block" : "none" }}
+          id="options-holder-id"
+          className="options-holder"
+        >
           {Arr[0].state.map(createSubOptionholder)}
         </div>
       </div>
