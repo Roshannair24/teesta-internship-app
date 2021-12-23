@@ -3,7 +3,11 @@ import { useState } from "react";
 import Arr from "../task";
 
 function Dropdown() {
-  const [view, setView] = useState("block");
+  const [rendered, setrendered] = useState(false);
+  const [cityrendered, setcityrendered] = useState(false);
+
+
+
 
   function inputText(event) {
     console.log("typed");
@@ -17,16 +21,12 @@ function Dropdown() {
 
     console.log("togggle display");
 
-    // setView(function (prevState) {
-    //   console.log("prev state");
-    //   console.log(prevState);
+    if (event.target.id === "primary-btn") {
+      console.log("its india button");
 
-    //   if (prevState === "none") {
-    //     return "block";
-    //   } else {
-    //     return "none";
-    //   }
-    // });
+      console.log(rendered);
+      setrendered(!rendered);
+    }
   }
 
   function checkboxClicked(event) {
@@ -101,14 +101,12 @@ function Dropdown() {
 
       <div className="inner-div    bottom-div">
         <div className="primary-btn-holder">
-          <button id="primary-btn">India</button>
+          <button onClick={clickHandler} id="primary-btn">
+            India
+          </button>
         </div>
 
-        <div
-          style={{ display: view }}
-          id="options-holder-id"
-          className="options-holder"
-        >
+        <div  style={{display:rendered===true?"block":"none"}}  id="options-holder-id" className="options-holder">
           {Arr[0].state.map(createSubOptionholder)}
         </div>
       </div>

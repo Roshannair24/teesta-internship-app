@@ -63,7 +63,7 @@ body {
 }
 
 .dropdown-itself .bottom-div .options-holder {
- padding-top: 0.25rem;
+  padding-top: 0.25rem;
   background-color: darkorange;
   width: 100%;
 }
@@ -74,6 +74,8 @@ body {
   .sub-options-holder-a
   .sub-options-holder-a-top {
   background-color: firebrick;
+
+  cursor: pointer;
 }
 
 .dropdown-itself
