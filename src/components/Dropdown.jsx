@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Arr from "../task";
+import checkedArr from "../checkedArr";
 
 function Dropdown() {
   const [rendered, setrendered] = useState(false);
@@ -9,6 +10,10 @@ function Dropdown() {
     WestBengal: false,
     Karnataka: false,
   });
+
+  const [checkedstateObject, setcheckedstateObject] = useState(checkedArr);
+
+  const [objToExport, setobjToExport] = useState({});
 
   function inputText(event) {
     console.log("typed");
@@ -102,24 +107,14 @@ function Dropdown() {
 
         console.log("same:  check every suboption");
 
-
         console.log(item);
 
         console.log(item.city);
 
-        item.city.forEach(
-          
-         function(subitem){
-
+        item.city.forEach(function (subitem) {
           console.log("suboption");
           console.log(subitem);
-          
-
-         }
-          
-          );
-
-
+        });
       }
     }
   }
