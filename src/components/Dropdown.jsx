@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import Arr from "../task";
 
 function Dropdown() {
-  const [view, setView] = useState("none");
+  const [view, setView] = useState("block");
 
   function inputText(event) {
     console.log("typed");
@@ -16,16 +17,16 @@ function Dropdown() {
 
     console.log("togggle display");
 
-    setView(function (prevState) {
-      console.log("prev state");
-      console.log(prevState);
+    // setView(function (prevState) {
+    //   console.log("prev state");
+    //   console.log(prevState);
 
-      if (prevState === "none") {
-        return "block";
-      } else {
-        return "none";
-      }
-    });
+    //   if (prevState === "none") {
+    //     return "block";
+    //   } else {
+    //     return "none";
+    //   }
+    // });
   }
 
   function checkboxClicked(event) {
@@ -34,6 +35,56 @@ function Dropdown() {
     console.log(event.target.value);
 
     console.log(event.target.name);
+  }
+
+  function createSubOptionholder(item) {
+    console.log("at create sub option holder func");
+
+    console.log(item);
+    console.log(item.state);
+    return (
+      <div className="sub-options-holder-a">
+        <div className="sub-options-holder-a-top">
+          <input
+            onClick={checkboxClicked}
+            type="checkbox"
+            id={"id_" + item.state}
+            name={"n_" + item.state}
+            value={"val_" + item.state}
+          ></input>
+
+          <span id={"span_id_" + item.state} onClick={clickHandler}>
+            {item.state}
+          </span>
+        </div>
+
+        <div className="sub-options-holder-a-bottom">
+          <ul>
+            {item.city.map(function (item) {
+              console.log(item);
+
+              console.log("item.name");
+
+              console.log(item.name);
+
+              return (
+                <li>
+                  <input
+                    onClick={checkboxClicked}
+                    type="checkbox"
+                    id={"id_" + item.name}
+                    name={"n_" + item.name}
+                    value={"val_" + item.name}
+                  ></input>
+
+                  <label for={"id_" + item.name}>{item.name}</label>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -50,9 +101,7 @@ function Dropdown() {
 
       <div className="inner-div    bottom-div">
         <div className="primary-btn-holder">
-          <button id="primary-btn" onClick={clickHandler}>
-            India
-          </button>
+          <button id="primary-btn">India</button>
         </div>
 
         <div
@@ -60,117 +109,7 @@ function Dropdown() {
           id="options-holder-id"
           className="options-holder"
         >
-          <div className="sub-options-holder-a">
-            <div className="sub-options-holder-a-top">
-              <input
-                onClick={checkboxClicked}
-                type="checkbox"
-                id="id_Madhyapradesh"
-                name="n_Madhyapradesh"
-                value="val_Madhyapradesh"
-              ></input>
-
-              {/* <label onClick={clickHandler}   for="id_Madhyapradesh"> Madhyapradesh</label> */}
-
-              <span id="span_id_Madhyapradesh" onClick={clickHandler}>
-                Madhyapradesh
-              </span>
-            </div>
-            <div className="sub-options-holder-a-bottom">
-              <ul>
-                <li>
-                  <input
-                    onClick={checkboxClicked}
-                    type="checkbox"
-                    id="id_Indore"
-                    name="n_Indore"
-                    value="val_Indore"
-                  ></input>
-
-                  <label for="id_Indore">Indore</label>
-                </li>
-
-                <li>
-                  <input
-                    onClick={checkboxClicked}
-                    type="checkbox"
-                    id="id_Bhopal"
-                    name="n_Bhopal"
-                    value="val_Bhopal"
-                  ></input>
-
-                  <label for="id_Bhopal">Bhopal</label>
-                </li>
-                <li>
-                  <input
-                    onClick={checkboxClicked}
-                    type="checkbox"
-                    id="id_Harda"
-                    name="n_Harda"
-                    value="val_Harda"
-                  ></input>
-
-                  <label for="id_Harda">Harda</label>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="sub-options-holder-a">
-            <div className="sub-options-holder-a-top">
-              <input
-                onClick={checkboxClicked}
-                type="checkbox"
-                id="id_WestBengal"
-                name="n_WestBengal"
-                value="val_WestBengal"
-              ></input>
-
-              {/* <label onClick={clickHandler}   for="id_Madhyapradesh"> Madhyapradesh</label> */}
-
-              <span id="span_id_WestBengal" onClick={clickHandler}>
-                West Bengal
-              </span>
-            </div>
-            <div className="sub-options-holder-a-bottom">
-              <ul>
-                <li>
-                  <input
-                    onClick={checkboxClicked}
-                    type="checkbox"
-                    id="id_Kolkata"
-                    name="n_Kolkata"
-                    value="val_Kolkata"
-                  ></input>
-
-                  <label for="id_Kolkata">Kolkata</label>
-                </li>
-
-                <li>
-                  <input
-                    onClick={checkboxClicked}
-                    type="checkbox"
-                    id="id_Alipurduar"
-                    name="n_Alipurduar"
-                    value="val_Alipurduar"
-                  ></input>
-
-                  <label for="id_Alipurduar">Alipurduar</label>
-                </li>
-                <li>
-                  <input
-                    onClick={checkboxClicked}
-                    type="checkbox"
-                    id="id_Bankura"
-                    name="n_Bankura"
-                    value="val_Bankura"
-                  ></input>
-
-                  <label for="id_Bankura">Bankura</label>
-                </li>
-              </ul>
-            </div>
-          </div>
+          {Arr[0].state.map(createSubOptionholder)}
         </div>
       </div>
     </div>
