@@ -36,7 +36,6 @@ function Dropdown() {
 
       targetToCompare = targetToCompare.replace(" ", "");
 
-
       console.log("targetToCompare");
       console.log(targetToCompare);
 
@@ -61,24 +60,68 @@ function Dropdown() {
             WestBengal: !prevValue.WestBengal,
             Karnataka: prevValue.Karnataka,
           };
-        }else if(targetToCompare === "Karnataka"){
+        } else if (targetToCompare === "Karnataka") {
           return {
             Madhyapradesh: prevValue.Madhyapradesh,
             WestBengal: prevValue.WestBengal,
             Karnataka: !prevValue.Karnataka,
           };
-
         }
       });
     }
   }
 
   function checkboxClicked(event) {
-    console.log("check box clicked");
+    // console.log("check box clicked");
 
-    console.log(event.target.value);
+    // console.log(event.target.value);
 
-    console.log(event.target.name);
+    // console.log(event.target.name);
+
+    // console.log(event.target.className);
+
+    let tempName = event.target.name;
+    tempName = tempName.replace("n_", "");
+    console.log("tempName");
+    console.log(tempName);
+    Arr[0].state.forEach(myFunction);
+
+    function myFunction(item, index) {
+      console.log("each item");
+      // console.log(item);
+
+      let propToCompareTo = item.state;
+
+      propToCompareTo = propToCompareTo.replace(" ", "");
+
+      console.log("propToCompareTo");
+      console.log(propToCompareTo);
+
+      if (propToCompareTo === tempName) {
+        //if state checked
+
+        console.log("same:  check every suboption");
+
+
+        console.log(item);
+
+        console.log(item.city);
+
+        item.city.forEach(
+          
+         function(subitem){
+
+          console.log("suboption");
+          console.log(subitem);
+          
+
+         }
+          
+          );
+
+
+      }
+    }
   }
 
   function createSubOptionholder(item) {
@@ -89,50 +132,38 @@ function Dropdown() {
 
     let tempState = item.state;
 
+    tempState = tempState.replace(" ", "");
     return (
       <div className="sub-options-holder-a">
         <div className="sub-options-holder-a-top">
           <input
             onClick={checkboxClicked}
             type="checkbox"
-            id={"id_" + item.state}
-            name={"n_" + item.state}
-            value={"val_" + item.state}
+            id={"id_" + tempState}
+            name={"n_" + tempState}
+            value={"val_" + tempState}
           ></input>
 
-          <span id={"span_id_" + item.state} onClick={clickHandler}>
-            {item.state}
+          <span id={"span_id_" + tempState} onClick={clickHandler}>
+            {tempState}
           </span>
         </div>
 
         <div
-          id={"bottom_id_" + item.state}
+          id={"bottom_id_" + tempState}
           className="sub-options-holder-a-bottom"
         >
           <ul>
             {item.city.map(function (item) {
-
-console.log("stateObject");
-console.log(stateObject);
-console.log("tempState");
-console.log(tempState);
-console.log("stateObject.tempState");
-console.log(stateObject[tempState]);
-
-
               return (
-
-
-
-
                 <li
-                  className={tempState=tempState.replace(" ", "")}
+                  className={tempState}
                   style={{
-                    display:
-                      stateObject[tempState] === true ? "block" : "none",
+                    display: stateObject[tempState] === true ? "block" : "none",
                   }}
                 >
                   <input
+                    className={"checkbox_" + tempState}
                     onClick={checkboxClicked}
                     type="checkbox"
                     id={"id_" + item.name}
@@ -175,6 +206,10 @@ console.log(stateObject[tempState]);
           className="options-holder"
         >
           {Arr[0].state.map(createSubOptionholder)}
+
+          <div className="submit-btn-holder">
+            <button>Submit</button>
+          </div>
         </div>
       </div>
     </div>
