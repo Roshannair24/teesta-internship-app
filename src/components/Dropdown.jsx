@@ -15,6 +15,8 @@ function Dropdown() {
 
   const [checkedstateObject, setcheckedstateObject] = useState({});
 
+  const [parentcityObject, setparentcityObject] = useState({});
+
   const [Madhyapradesh, setMadhyapradesh] = useState({ checked: false });
 
   const [objToExport, setobjToExport] = useState({});
@@ -81,32 +83,15 @@ function Dropdown() {
   }
 
   function checkboxClicked(event) {
-    // console.log("check box clicked");
+    console.log("check box clicked");
 
     // console.log(event.target);
 
-    // console.log("Madhyapradesh.checked");
+    // console.log(event.target.name);
 
-    // console.log(Madhyapradesh.checked);
+    // console.log("checkedstateObject");
 
-    // setMadhyapradesh(function (prevValue) {
-    //   console.log("m prevValue");
-
-    //   console.log(prevValue);
-    //   console.log(prevValue.checked);
-
-    //   return { checked: !prevValue.checked };
-    // });
-
-    console.log("check box clicked");
-
-    console.log(event.target);
-
-    console.log(event.target.name);
-
-    console.log("checkedstateObject");
-
-    console.log(checkedstateObject);
+    // console.log(checkedstateObject);
 
     if (event.target.name === "n_Madhyapradesh") {
       setcheckedstateObject(function (prevValue) {
@@ -134,6 +119,27 @@ function Dropdown() {
         return {
           ...prevValue,
           [event.target.name.replace("n_", "")]: !prevValue.Karnataka,
+        };
+      });
+    } else {
+      console.log("here");
+      console.log(event.target);
+
+      console.log(event.target.className);
+      console.log(event.target.name);
+      setparentcityObject(function (prevValue) {
+        console.log("parent city prevValue");
+
+        let tempProp = event.target.name.replace("n_", "");
+
+        console.log(prevValue);
+     
+        // [event.target.className.replace("checkbox_", "")]
+        let parent=[event.target.className.replace("checkbox_", "")];
+
+        return {
+          ...prevValue,
+         [tempProp]: !prevValue[tempProp],
         };
       });
     }
@@ -178,9 +184,11 @@ function Dropdown() {
                   }}
                 >
                   <input
-                    checked={checkedstateObject[tempState] === true ? true : checked}
+                    checked={
+                      checkedstateObject[tempState] === true ? true : (parentcityObject[item.name]===true?true:false)
+                    }
                     className={"checkbox_" + tempState}
-                    onClick={checkboxClicked}
+                    onChange={checkboxClicked}
                     type="checkbox"
                     id={"id_" + item.name}
                     name={"n_" + item.name}
