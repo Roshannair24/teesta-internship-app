@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Arr from "../task";
-import checkedArr from "../checkedArr";
+import checkedObj from "../checkedArr";
 
 function Dropdown() {
   const [rendered, setrendered] = useState(false);
@@ -11,7 +11,11 @@ function Dropdown() {
     Karnataka: false,
   });
 
-  const [checkedstateObject, setcheckedstateObject] = useState(checkedArr);
+  const [checked, setchecked] = useState(false);
+
+  const [checkedstateObject, setcheckedstateObject] = useState({});
+
+  const [Madhyapradesh, setMadhyapradesh] = useState({ checked: false });
 
   const [objToExport, setobjToExport] = useState({});
 
@@ -79,43 +83,59 @@ function Dropdown() {
   function checkboxClicked(event) {
     // console.log("check box clicked");
 
-    // console.log(event.target.value);
+    // console.log(event.target);
 
-    // console.log(event.target.name);
+    // console.log("Madhyapradesh.checked");
 
-    // console.log(event.target.className);
+    // console.log(Madhyapradesh.checked);
 
-    let tempName = event.target.name;
-    tempName = tempName.replace("n_", "");
-    console.log("tempName");
-    console.log(tempName);
-    Arr[0].state.forEach(myFunction);
+    // setMadhyapradesh(function (prevValue) {
+    //   console.log("m prevValue");
 
-    function myFunction(item, index) {
-      console.log("each item");
-      // console.log(item);
+    //   console.log(prevValue);
+    //   console.log(prevValue.checked);
 
-      let propToCompareTo = item.state;
+    //   return { checked: !prevValue.checked };
+    // });
 
-      propToCompareTo = propToCompareTo.replace(" ", "");
+    console.log("check box clicked");
 
-      console.log("propToCompareTo");
-      console.log(propToCompareTo);
+    console.log(event.target);
 
-      if (propToCompareTo === tempName) {
-        //if state checked
+    console.log(event.target.name);
 
-        console.log("same:  check every suboption");
+    console.log("checkedstateObject");
 
-        console.log(item);
+    console.log(checkedstateObject);
 
-        console.log(item.city);
+    if (event.target.name === "n_Madhyapradesh") {
+      setcheckedstateObject(function (prevValue) {
+        console.log("m prevValue");
 
-        item.city.forEach(function (subitem) {
-          console.log("suboption");
-          console.log(subitem);
-        });
-      }
+        console.log(prevValue);
+
+        return {
+          ...prevValue,
+          [event.target.name.replace("n_", "")]: !prevValue.Madhyapradesh,
+        };
+      });
+    } else if (event.target.name === "n_WestBengal") {
+      setcheckedstateObject(function (prevValue) {
+        console.log(prevValue);
+        return {
+          ...prevValue,
+          [event.target.name.replace("n_", "")]: !prevValue.WestBengal,
+        };
+      });
+    } else if (event.target.name === "n_Karnataka") {
+      setcheckedstateObject(function (prevValue) {
+        console.log(prevValue);
+
+        return {
+          ...prevValue,
+          [event.target.name.replace("n_", "")]: !prevValue.Karnataka,
+        };
+      });
     }
   }
 
@@ -158,6 +178,7 @@ function Dropdown() {
                   }}
                 >
                   <input
+                    checked={checkedstateObject[tempState] === true ? true : checked}
                     className={"checkbox_" + tempState}
                     onClick={checkboxClicked}
                     type="checkbox"

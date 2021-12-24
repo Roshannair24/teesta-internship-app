@@ -1,64 +1,61 @@
 import React from "react";
 
-const checkedArr = [
-  {
-    state: "Madhyapradesh",
-    checked:false,
+const checkedObj = {
+  Madhyapradesh: {
+    checked: false,
     city: [
       {
         name: "Indore",
-        checked:false
+        checked: false,
       },
       {
         name: "Bhopal",
-        checked:false
+        checked: false,
       },
       {
         name: "Harda",
-        checked:false
+        checked: false,
       },
     ],
   },
-  {
-    state: "West Bengal",
-    checked:false,
+  WestBengal: {
+    checked: false,
     city: [
       {
         name: "Kolkata",
-        checked:false
+        checked: false,
       },
       {
         name: "Alipurduar",
-        checked:false
+        checked: false,
       },
       {
         name: "Bankura",
-        checked:false
+        checked: false,
       },
     ],
   },
-  {
-    state: "Karnataka",
-    checked:false,
+  Karnataka: {
+    checked: false,
     city: [
       {
         name: "Shivamogga",
-        checked:false
+        checked: false,
       },
       {
         name: "Udupi",
-        checked:false
+        checked: false,
       },
       {
         name: "Vijayapura",
-        checked:false
+        checked: false,
       },
       {
         name: "Bengalore",
-        checked:false
+        checked: false,
       },
     ],
   },
-];
+};
 
-export default checkedArr;
+export default checkedObj;
