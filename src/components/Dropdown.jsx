@@ -17,6 +17,12 @@ function Dropdown() {
 
   const [primarystateObject, setprimarystateObject] = useState({});
 
+  const [statecitycounterObject, setstatecitycounterObject] = useState({
+    Madhyapradesh: 0,
+    WestBengal: 0,
+    Karnataka: 0,
+  });
+
   const [objToExport, setobjToExport] = useState({});
 
   function inputText(event) {
@@ -92,7 +98,6 @@ function Dropdown() {
     // console.log(checkedstateObject);
 
     if (event.target.name === "n_Madhyapradesh") {
-
       setprimarystateObject(function (prevValue) {
         console.log("here at primary");
         console.log(prevValue);
@@ -114,7 +119,6 @@ function Dropdown() {
         };
       });
     } else if (event.target.name === "n_WestBengal") {
-
       setprimarystateObject(function (prevValue) {
         console.log("here at primary");
         console.log(prevValue);
@@ -124,11 +128,6 @@ function Dropdown() {
           [event.target.name.replace("n_", "")]: !prevValue.WestBengal,
         };
       });
-
-
-
-
-
 
       setcheckedstateObject(function (prevValue) {
         console.log(prevValue);
@@ -138,7 +137,6 @@ function Dropdown() {
         };
       });
     } else if (event.target.name === "n_Karnataka") {
-
       setprimarystateObject(function (prevValue) {
         console.log("here at primary");
         console.log(prevValue);
@@ -148,12 +146,6 @@ function Dropdown() {
           [event.target.name.replace("n_", "")]: !prevValue.Karnataka,
         };
       });
-
-
-
-
-
-
 
       setcheckedstateObject(function (prevValue) {
         console.log(prevValue);
@@ -169,19 +161,13 @@ function Dropdown() {
 
       console.log(event.target.className);
 
-let parentClass=event.target.className.replace("checkbox_", "");
-
+      let parentClass = event.target.className.replace("checkbox_", "");
 
       console.log(event.target.name);
       setparentcityObject(function (prevValue) {
-        console.log("parent city prevValue");
+        // console.log("parent city prevValue");
 
         let tempProp = event.target.name.replace("n_", "");
-
-        console.log(prevValue);
-
-        // [event.target.className.replace("checkbox_", "")]
-        // let parent=[event.target.className.replace("checkbox_", "")];
 
         return {
           ...prevValue,
@@ -189,10 +175,22 @@ let parentClass=event.target.className.replace("checkbox_", "");
         };
       });
 
-      console.log("parentClass");
+      let cityName = event.target.name.replace("n_", "");
 
+      // setstatecitycounterObject(function (prevValue) {
+      //   console.log("statecitycounterObject prevValue");
 
-      console.log(parentClass);
+      //   console.log(prevValue);
+      //   console.log(parentcityObject);
+      //   console.log(parentClass);
+      //   console.log( cityName);
+      //   console.log(parentcityObject[cityName]);
+      //    console.log(prevValue[parentClass]);
+
+      //   return {
+      //     ...prevValue,
+      //   };
+      // });
 
       setprimarystateObject(function (prevValue) {
         console.log("here at primary");
@@ -203,10 +201,6 @@ let parentClass=event.target.className.replace("checkbox_", "");
           [parentClass]: true,
         };
       });
-
-
-
-
     }
   }
 
@@ -246,26 +240,28 @@ let parentClass=event.target.className.replace("checkbox_", "");
                 <li
                   className={tempState}
                   style={{
-                    display: stateObject[tempState] === true ? "block" : "none",
+                    display: stateObject[tempState] === true ? "flex" : "none",
                   }}
                 >
-                  <input
-                    checked={
-                      checkedstateObject[tempState] === true
-                        ? true
-                        : parentcityObject[item.name] === true
-                        ? true
-                        : false
-                    }
-                    className={"checkbox_" + tempState}
-                    onChange={checkboxClicked}
-                    type="checkbox"
-                    id={"id_" + item.name}
-                    name={"n_" + item.name}
-                    value={"val_" + item.name}
-                  ></input>
+                  <div className="li-content-holder">
+                    <input
+                      checked={
+                        checkedstateObject[tempState] === true
+                          ? true
+                          : parentcityObject[item.name] === true
+                          ? true
+                          : false
+                      }
+                      className={"checkbox_" + tempState}
+                      onChange={checkboxClicked}
+                      type="checkbox"
+                      id={"id_" + item.name}
+                      name={"n_" + item.name}
+                      value={"val_" + item.name}
+                    ></input>
 
-                  <label for={"id_" + item.name}>{item.name}</label>
+                    <label for={"id_" + item.name}>{item.name}</label>
+                  </div>
                 </li>
               );
             })}
