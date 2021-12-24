@@ -11,13 +11,11 @@ function Dropdown() {
     Karnataka: false,
   });
 
-  const [checked, setchecked] = useState(false);
-
   const [checkedstateObject, setcheckedstateObject] = useState({});
 
   const [parentcityObject, setparentcityObject] = useState({});
 
-  const [Madhyapradesh, setMadhyapradesh] = useState({ checked: false });
+  const [primarystateObject, setprimarystateObject] = useState({});
 
   const [objToExport, setobjToExport] = useState({});
 
@@ -94,6 +92,17 @@ function Dropdown() {
     // console.log(checkedstateObject);
 
     if (event.target.name === "n_Madhyapradesh") {
+
+      setprimarystateObject(function (prevValue) {
+        console.log("here at primary");
+        console.log(prevValue);
+
+        return {
+          ...prevValue,
+          [event.target.name.replace("n_", "")]: !prevValue.Madhyapradesh,
+        };
+      });
+
       setcheckedstateObject(function (prevValue) {
         console.log("m prevValue");
 
@@ -105,6 +114,22 @@ function Dropdown() {
         };
       });
     } else if (event.target.name === "n_WestBengal") {
+
+      setprimarystateObject(function (prevValue) {
+        console.log("here at primary");
+        console.log(prevValue);
+
+        return {
+          ...prevValue,
+          [event.target.name.replace("n_", "")]: !prevValue.WestBengal,
+        };
+      });
+
+
+
+
+
+
       setcheckedstateObject(function (prevValue) {
         console.log(prevValue);
         return {
@@ -113,6 +138,23 @@ function Dropdown() {
         };
       });
     } else if (event.target.name === "n_Karnataka") {
+
+      setprimarystateObject(function (prevValue) {
+        console.log("here at primary");
+        console.log(prevValue);
+
+        return {
+          ...prevValue,
+          [event.target.name.replace("n_", "")]: !prevValue.Karnataka,
+        };
+      });
+
+
+
+
+
+
+
       setcheckedstateObject(function (prevValue) {
         console.log(prevValue);
 
@@ -126,6 +168,10 @@ function Dropdown() {
       console.log(event.target);
 
       console.log(event.target.className);
+
+let parentClass=event.target.className.replace("checkbox_", "");
+
+
       console.log(event.target.name);
       setparentcityObject(function (prevValue) {
         console.log("parent city prevValue");
@@ -133,15 +179,34 @@ function Dropdown() {
         let tempProp = event.target.name.replace("n_", "");
 
         console.log(prevValue);
-     
+
         // [event.target.className.replace("checkbox_", "")]
-        let parent=[event.target.className.replace("checkbox_", "")];
+        // let parent=[event.target.className.replace("checkbox_", "")];
 
         return {
           ...prevValue,
-         [tempProp]: !prevValue[tempProp],
+          [tempProp]: !prevValue[tempProp],
         };
       });
+
+      console.log("parentClass");
+
+
+      console.log(parentClass);
+
+      setprimarystateObject(function (prevValue) {
+        console.log("here at primary");
+        console.log(prevValue);
+
+        return {
+          ...prevValue,
+          [parentClass]: true,
+        };
+      });
+
+
+
+
     }
   }
 
@@ -158,6 +223,7 @@ function Dropdown() {
       <div className="sub-options-holder-a">
         <div className="sub-options-holder-a-top">
           <input
+            checked={primarystateObject[tempState] === true ? true : false}
             onClick={checkboxClicked}
             type="checkbox"
             id={"id_" + tempState}
@@ -185,7 +251,11 @@ function Dropdown() {
                 >
                   <input
                     checked={
-                      checkedstateObject[tempState] === true ? true : (parentcityObject[item.name]===true?true:false)
+                      checkedstateObject[tempState] === true
+                        ? true
+                        : parentcityObject[item.name] === true
+                        ? true
+                        : false
                     }
                     className={"checkbox_" + tempState}
                     onChange={checkboxClicked}
